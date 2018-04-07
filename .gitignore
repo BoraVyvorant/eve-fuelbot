@@ -1,3 +1,16 @@
+# Don't commit imported gems
+vendor/
+
+# Don't commit the actual configuration file.
+config.yaml
+
+# Don't commit the state file.
+state.yaml
+
+#
+# Below this line we have the default GitHub ignores for Ruby.
+#
+
 *.gem
 *.rbc
 /.config

@@ -1,0 +1,28 @@
+#
+# EXAMPLE configuration for FuelBot, with secrets redacted.
+#
+
+#
+# Configuration for Slack notifications.
+#
+:slack:
+  :webhook_url: 'REDACTED'
+  :defaults:
+    :channel: 'REDACTED'
+    :username: 'FuelBot'
+    :icon_emoji: ':fuelpump:'
+
+:refresh_token: 'REDACTED'
+
+:client_id: 'REDACTED'
+:client_secret: 'REDACTED'
+
+#
+# Restrict listings to specific named systems.
+#
+:systems: [Boystin]
+
+#
+# Location of our state file.
+#
+:statefile: state.yaml
