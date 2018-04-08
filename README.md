@@ -85,15 +85,3 @@ $ bundle exec ruby fuelbot.rb
 Over in Slack, you might see something like this:
 
 ![Slack notification from FuelBot](fuelbot.png)
-
-## Future Plans
-
-The thresholds between fuelling states should be taken from the configuration
-file.
-
-It's possible for Slack messages to report times in the local timezone of each
-reader, and this seems like a good approach (possibly as well as the EVE time
-currently reported).
-
-For my own deployment, I am going to use Docker and once that is done I will
-add appropriate support here.
