@@ -86,3 +86,18 @@ $ bundle exec ruby fuelbot.rb
 Over in Slack, you might see something like this:
 
 ![Slack notification from FuelBot](fuelbot.png)
+
+## Using Docker for Deployment
+
+The application is designed to be relatively friendly to being deployed
+as a Docker image and executed within a container. The following files
+are included to give some ideas as to how to go about that:
+
+* `.dockerignore`
+* `docker-build`
+* `docker-run`
+* `Dockerfile`
+
+The assumption is that you have a basic level of understanding about how
+Docker works; let me know in a GitHub issue if you have that but something
+is still unclear.
