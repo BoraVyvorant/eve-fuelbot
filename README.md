@@ -20,11 +20,12 @@ These arbitrary thresholds are currently hard-coded in `fuelbot.rb`.
 
 ## Configuration
 
-### SSO and ESI Configuration
-
-The application takes its configuration from `config.yaml`. This contains
+The application takes its configuration from a file named on the command line,
+or `config.yaml` by default. This file contains
 various secrets, so I haven't included the one I'm using in the repository.
 Instead, `example-config.yaml` can be used as a template.
+
+### SSO and ESI Configuration
 
 You need to have registered a third-party application with CCP
 at <https://developers.eveonline.com>; this will give

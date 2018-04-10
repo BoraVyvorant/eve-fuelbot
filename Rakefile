@@ -3,5 +3,5 @@ task :cop do
 end
 
 task :default do
-  system 'bundle exec ruby fuelbot.rb'
+  system 'bundle exec ruby fuelbot.rb test-config.yaml'
 end

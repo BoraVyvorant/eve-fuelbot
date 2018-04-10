@@ -1,8 +1,14 @@
 # Don't commit imported gems
 vendor/
 
-# Don't commit the actual configuration file.
+# Don't commit the default configuration file.
 config.yaml
+
+# Don't commit other variant configuration files.
+*-config.yaml
+
+# _Do_ commit the example configuration file.
+!example-config.yaml
 
 # Don't commit the state file.
 state.yaml
