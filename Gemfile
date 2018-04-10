@@ -6,6 +6,7 @@ group :devel do # required for development
   gem 'rubocop'
 end
 
+gem 'activesupport'
 gem 'esi-client-bvv'
 gem 'oauth2', '~> 1.4.0'
 gem 'slack-notifier'
