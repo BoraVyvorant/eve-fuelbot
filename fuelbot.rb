@@ -73,13 +73,23 @@ end
 # Sort by fuel expiry time.
 structures.sort_by!(&:fuel_expires)
 
+#
+# Configure the number of days under which we should regard the
+# fuelling state as either 'danger' or 'warning'.
+#
+DANGER_DAYS = config[:danger_days] || 7
+WARNING_DAYS = config[:warning_days] || 14
+
+#
+# Translate the number of days left to a fuelling state.
+#
 def left_to_state(left)
-  if left > 14
-    'good'
-  elsif left > 7
+  if left <= DANGER_DAYS
+    'danger'
+  elsif left <= WARNING_DAYS
     'warning'
   else
-    'danger'
+    'good'
   end
 end
 

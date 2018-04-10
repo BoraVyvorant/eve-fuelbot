@@ -24,6 +24,12 @@ client_secret: 'REDACTED'
 systems: [Boystin]
 
 #
+# Thresholds to use for the warning and danger states.
+#
+warning_days: 14
+danger_days: 7
+
+#
 # Location of our state file.
 #
 statefile: state.yaml

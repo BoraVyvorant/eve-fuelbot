@@ -1,22 +1,16 @@
 # EVE FuelBot
 
 This Ruby application can be used to notify Slack channels of the _fuelling
-state_ of a corporation's Upwell structures. It is stateful, so that it can
-be run often but only report state changes.
+state_ of a corporation's Upwell structures. A structure's fuelling state
+is one of the following:
 
-A structure's fuelling state is one of the following:
+* `unknown`
+* `good`
+* `warning`
+* `danger`
 
-* `unknown` is regarded as the previous state for any structures not
-  already present in the state file.
-
-* `danger` means that the structure will run out of fuel in a week or less.
-
-* `warning` means that the structure will run out of fuel in more than a week,
-  but not more than two weeks.
-
-* `good` means that the structure has enough fuel to last at least two weeks.
-
-These arbitrary thresholds are currently hard-coded in `fuelbot.rb`.
+The application remembers the previous state of each structure so that it can
+be run often but only report when a structure's state changes.
 
 ## Configuration
 
@@ -48,6 +42,22 @@ The resulting refresh token goes into the
 If present, the `systems` configuration item is a list of solar system names;
 the application will only report on structures anchored in these systems.
 If `systems` is absent, structures in all systems will be included.
+
+The configuration items `danger_days` (default 7) and `warning_days` (default
+14) determine how to translate the time left before fuel runs out into
+a fuelling state:
+
+* If the time left is less than or equal to `danger_days`, the state will
+  be `danger`.
+
+* If the time left is greater than `danger_days` but less than or equal to
+  `warning_days`, the state will be `warning`.
+
+* If the time left is greater than `warning_days`, the state will be `good`.
+
+If you don't want to use the `warning` state, just set `danger_days` and
+`warning_days` to the same value. Structures will then go straight from
+`good` to `danger`.
 
 The application tracks the previous fuelling state of structures so that it can
 notify the Slack channel only when the state changes. This state is held by
