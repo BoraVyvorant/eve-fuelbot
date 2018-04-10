@@ -45,8 +45,9 @@ The resulting refresh token goes into the
 
 ### Operational Configuration
 
-The `systems` configuration item is a list of solar system names; the
-application will only report on structures anchored in these systems.
+If present, the `systems` configuration item is a list of solar system names;
+the application will only report on structures anchored in these systems.
+If `systems` is absent, structures in all systems will be included.
 
 The application tracks the previous fuelling state of structures so that it can
 notify the Slack channel only when the state changes. This state is held by

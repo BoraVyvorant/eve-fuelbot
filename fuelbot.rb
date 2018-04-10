@@ -56,11 +56,18 @@ corporation_id = character.corporation_id
 #
 structures = corporation_api.get_corporations_corporation_id_structures(corporation_id)
 
-# Remove any structures which aren't in the listed systems.
-system_names = universe_api.post_universe_ids(config[:systems]).systems
-system_ids = Set.new(system_names.map(&:id))
-structures.delete_if do |structure|
-  !system_ids.include?(structure.system_id)
+#
+# If a list of system names has been configured, remove any structures
+# which aren't in the listed systems.
+#
+if config[:systems]
+  # Make a set of IDs for the named systems
+  systems = universe_api.post_universe_ids(config[:systems]).systems
+  system_ids = Set.new(systems.map(&:id))
+  # Delete extractions in systems not included in that set
+  structures.delete_if do |structure|
+    !system_ids.include?(structure.system_id)
+  end
 end
 
 # Sort by fuel expiry time.

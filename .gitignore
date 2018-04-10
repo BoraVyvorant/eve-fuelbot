@@ -10,8 +10,8 @@ config.yaml
 # _Do_ commit the example configuration file.
 !example-config.yaml
 
-# Don't commit the state file.
-state.yaml
+# Don't commit the state file or any variants of it.
+*state.yaml
 
 #
 # Below this line we have the default GitHub ignores for Ruby.
