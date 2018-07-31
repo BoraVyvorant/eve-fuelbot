@@ -137,8 +137,8 @@ attachments = structures.map do |s|
   }
 end
 
-# If we have something that is other than a 'good' state, take special action
-panic = structures.find_index { |s| s[:state] != 'good' }
+# If we have any 'danger' states, take special action
+panic = structures.find_index { |s| s[:state] == 'danger' }
 panic_text = panic ? '<!channel> :scream:' : ''
 
 #

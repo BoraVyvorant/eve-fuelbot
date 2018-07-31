@@ -65,7 +65,7 @@ default in the file `state.yaml`, but if you'd like to put the state file
 somewhere else (for example so that you can mount it into a Docker container)
 then its location is taken from the `statefile` configuration item.
 
-If any of the notifications are for anything other than a `good` state,
+If any of the notifications are for a `danger` state,
 the message will be an `@channel` ping.
 
 ### Slack Configuration
