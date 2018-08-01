@@ -7,6 +7,8 @@ require 'slack-notifier'
 require 'yaml'
 require 'yaml/store'
 
+require_relative 'lib/esi_utils/esi_utils'
+
 #
 # Load the configuration file named on the command line,
 # or 'config.yaml' by default.
@@ -41,9 +43,11 @@ ESI.configure do |conf|
   conf.access_token = access_token.token
 end
 
-universe_api = ESI::UniverseApi.new
-corporation_api = ESI::CorporationApi.new
-character_api = ESI::CharacterApi.new
+my_client = ESIUtils::ESIClient.new
+
+universe_api = ESI::UniverseApi.new(my_client)
+corporation_api = ESI::CorporationApi.new(my_client)
+character_api = ESI::CharacterApi.new(my_client)
 
 #
 # From the public information about the character, locate the corporation ID.
