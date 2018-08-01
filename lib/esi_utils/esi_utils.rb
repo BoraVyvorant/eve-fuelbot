@@ -21,7 +21,6 @@ module ESIUtils
     end
 
     def call_api(http_method, path, opts = {})
-      path.start_with?('/v2/universe/structures') && path.sub!('/v2/', '/v1/')
       data, code, headers = super(http_method, path, opts)
       log_warning_header(path, headers)
       [data, code, headers]
