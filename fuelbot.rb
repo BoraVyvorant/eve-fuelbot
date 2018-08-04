@@ -75,8 +75,8 @@ if config[:systems]
   end
 end
 
-# Sort by fuel expiry time.
-structures.sort_by!(&:fuel_expires)
+# Sort by fuel expiry time. No expiry time sorts as now.
+structures.sort_by! { |s| s.fuel_expires || DateTime.new }
 
 #
 # Configure the number of days under which we should regard the
@@ -102,7 +102,7 @@ end
 structures.map! do |s|
   # Public information for the structure.
   pub = universe_api.get_universe_structures_structure_id(s.structure_id)
-  time_left = s.fuel_expires - DateTime.now
+  time_left = s.fuel_expires ? s.fuel_expires - DateTime.now : 0
   {
     structure_id: s.structure_id,
     system: pub.name.sub(/ - .*$/, ''),
@@ -130,16 +130,27 @@ end
 
 # Map each remaining structure to a Slack attachment
 attachments = structures.map do |s|
-  eve_time = s[:time].strftime('%A, %Y-%m-%d %H:%M:%S EVE time')
-  {
-    title: s[:name] + ' in ' + s[:system],
-    color: s[:state],
-    text: "Fuel expires in #{format('%.1f', s[:left])} days.\n" \
-          "Services will go offline at #{eve_time}.\n" \
-          "Old state: #{s[:old_state]}, new state: #{s[:state]}",
-    fallback: "#{s[:name]} in #{s[:system]} fuel state is #{s[:state]}.",
-    thumb_url: "https://imageserver.eveonline.com/Render/#{s[:type_id]}_128.png"
-  }
+  if s[:time]
+    eve_time = s[:time].strftime('%A, %Y-%m-%d %H:%M:%S EVE time')
+    {
+      title: s[:name] + ' in ' + s[:system],
+      color: s[:state],
+      text: "Fuel expires in #{format('%.1f', s[:left])} days.\n" \
+            "Services will go offline at #{eve_time}.\n" \
+            "Old state: #{s[:old_state]}, new state: #{s[:state]}",
+      fallback: "#{s[:name]} in #{s[:system]} fuel state is #{s[:state]}.",
+      thumb_url: "https://imageserver.eveonline.com/Render/#{s[:type_id]}_128.png"
+    }
+  else
+    {
+      title: s[:name] + ' in ' + s[:system],
+      color: s[:state],
+      text: "Structure is low power!\n" \
+            "Old state: #{s[:old_state]}, new state: #{s[:state]}",
+      fallback: "#{s[:name]} in #{s[:system]} fuel state is #{s[:state]}.",
+      thumb_url: "https://imageserver.eveonline.com/Render/#{s[:type_id]}_128.png"
+    }
+  end
 end
 
 # If we have any 'danger' states, take special action
