@@ -8,7 +8,7 @@ end
 
 gem 'activesupport'
 gem 'esi-client-bvv'
-gem 'esi-utils-bvv'
+gem 'esi-utils-bvv', '~> 0.1.1'
 gem 'oauth2', '~> 1.4.0'
 gem 'slack-notifier'
 
