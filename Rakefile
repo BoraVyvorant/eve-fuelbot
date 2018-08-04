@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 task :cop do
   system 'bundle exec rubocop'
 end
