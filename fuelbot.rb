@@ -3,13 +3,12 @@
 require 'active_support/core_ext/hash/indifferent_access'
 require 'date'
 require 'esi-client-bvv'
+require 'esi-utils-bvv'
 require 'oauth2'
 require 'set'
 require 'slack-notifier'
 require 'yaml'
 require 'yaml/store'
-
-require_relative 'lib/esi_utils/esi_utils'
 
 #
 # Load the configuration file named on the command line,
