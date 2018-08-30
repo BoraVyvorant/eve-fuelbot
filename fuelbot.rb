@@ -42,6 +42,8 @@ character_id = character_info['CharacterID']
 #
 ESI.configure do |conf|
   conf.access_token = access_token.token
+  conf.logger.progname = 'fuelbot'
+  conf.logger.level = config[:log_level] || 'info'
 end
 
 my_client = ESIUtils::ESIClient.new
